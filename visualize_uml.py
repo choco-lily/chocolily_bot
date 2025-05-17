@@ -22,8 +22,7 @@ def create_bot_class_diagram():
         'RPSCommand': 'name: string\ndescription: string\nexecute(interaction): Promise<void>\nhandleGame(interaction): Promise<void>\nupdateStats(winner): Promise<void>',
         'FortuneCommand': 'name: string\ndescription: string\nexecute(interaction): Promise<void>\ngetFortune(): string',
         'TarotCommand': 'name: string\ndescription: string\nexecute(interaction): Promise<void>\ndrawCards(): Card[]\ninterpretCards(cards): string',
-        'DiceCommand': 'name: string\ndescription: string\nexecute(interaction): Promise<void>\nrollDice(notation): number[]',
-        'EmoticonCommand': 'name: string\ndescription: string\nexecute(interaction): Promise<void>\nconvertToEmoticon(text): string'
+        'DiceCommand': 'name: string\ndescription: string\nexecute(interaction): Promise<void>\nrollDice(notation): number[]'
     }
     
     # 명령어 클래스 추가
