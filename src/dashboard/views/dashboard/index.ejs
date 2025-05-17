@@ -1,0 +1,81 @@
+<div class="container py-4 text-start">
+  <h1 class="mb-4">서버 목록</h1>
+
+  <!-- 봇이 있는 서버 목록 -->
+  <div class="card mb-4 text-start">
+    <div class="card-header text-start">
+      <h5 class="mb-0">봇이 있는 서버</h5>
+    </div>
+    <div class="card-body text-start">
+      <% if (guildsWithBot.length === 0) { %>
+        <p class="text-muted mb-0">봇이 있는 서버가 없습니다.</p>
+      <% } else { %>
+        <div class="row g-4 text-start">
+          <% guildsWithBot.forEach(guild => { %>
+            <div class="col-12 col-md-6 col-lg-4 text-start">
+              <div class="card h-100 text-start">
+                <div class="card-body text-start">
+                  <div class="d-flex align-items-center mb-3 text-start">
+                    <% if (guild.icon) { %>
+                      <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.png" alt="Server Icon" class="rounded-circle me-3" width="48" height="48">
+                    <% } else { %>
+                      <div class="server-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px; font-size: 1.2rem;">
+                        <%= guild.name.substr(0, 2).toUpperCase() %>
+                      </div>
+                    <% } %>
+                    <div class="text-start">
+                      <h5 class="mb-1"><%= guild.name %></h5>
+                      <p class="text-muted mb-0" style="font-size:0.9rem;">ID: <%= guild.id %></p>
+                    </div>
+                  </div>
+                  <a href="/dashboard/server/<%= guild.id %>" class="btn btn-primary text-start" style="display:inline-block;">
+                    <i class="fas fa-cog me-2"></i> 서버 설정
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- 봇이 없는 서버 목록 -->
+  <div class="card text-start">
+    <div class="card-header text-start">
+      <h5 class="mb-0">봇이 없는 서버</h5>
+    </div>
+    <div class="card-body text-start">
+      <% if (guildsWithoutBot.length === 0) { %>
+        <p class="text-muted mb-0">봇을 초대할 수 있는 서버가 없습니다.</p>
+      <% } else { %>
+        <div class="row g-4 text-start">
+          <% guildsWithoutBot.forEach(guild => { %>
+            <div class="col-12 col-md-6 col-lg-4 text-start">
+              <div class="card h-100 text-start">
+                <div class="card-body text-start">
+                  <div class="d-flex align-items-center mb-3 text-start">
+                    <% if (guild.icon) { %>
+                      <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.png" alt="Server Icon" class="rounded-circle me-3" width="48" height="48">
+                    <% } else { %>
+                      <div class="server-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px; font-size: 1.2rem;">
+                        <%= guild.name.substr(0, 2).toUpperCase() %>
+                      </div>
+                    <% } %>
+                    <div class="text-start">
+                      <h5 class="mb-1"><%= guild.name %></h5>
+                      <p class="text-muted mb-0" style="font-size:0.9rem;">ID: <%= guild.id %></p>
+                    </div>
+                  </div>
+                  <a href="https://discord.com/api/oauth2/authorize?client_id=<%= config.discord.clientId %>&permissions=8&scope=bot%20applications.commands&guild_id=<%= guild.id %>" class="btn btn-discord text-start" style="display:inline-block;" target="_blank">
+                    <i class="fas fa-plus-circle me-2"></i> 봇 초대하기
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div> 

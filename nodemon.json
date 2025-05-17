@@ -1,0 +1,15 @@
+{
+  "watch": [
+    "src/**/*.ts",
+    "src/**/*.js"
+  ],
+  "ext": "ts,js",
+  "ignore": [
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts",
+    "src/dashboard/views/**/*.ejs"
+  ],
+  "exec": "ts-node ./src/index.ts",
+  "quiet": true,
+  "verbose": false
+} 

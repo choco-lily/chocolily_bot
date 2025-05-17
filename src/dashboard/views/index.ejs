@@ -1,0 +1,122 @@
+<!-- 환영 섹션 -->
+<section class="py-5 text-center">
+  <div class="row py-lg-5">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <h1 class="fw-light">쵸코릴리봇</h1>
+      <p class="lead text-white">다양한 게임과 재미있는 기능을 제공하는 쵸코릴리봇입니다. 랭킹 시스템, 서버별 설정 등 다양한 기능을 제공합니다.</p>
+      <% if (!user) { %>
+        <a href="/auth/discord" class="btn btn-lg btn-discord mt-3">
+          <i class="fab fa-discord me-2"></i> 디스코드로 로그인
+        </a>
+      <% } else { %>
+        <a href="/dashboard" class="btn btn-lg btn-discord mt-3">
+          <i class="fas fa-tachometer-alt me-2"></i> 대시보드로 이동
+        </a>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<!-- 기능 섹션 -->
+<section class="py-5">
+  <h2 class="text-center mb-5">주요 기능</h2>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card h-100 p-4 text-center">
+        <div class="card-body">
+          <i class="fas fa-gamepad fa-3x mb-3 text-primary"></i>
+          <h3 class="card-title h5">다양한 게임</h3>
+          <!-- <p class="card-text">가위바위보, 끝말잇기, 퀴즈 등 다양한 게임을 즐길 수 있습니다.</p> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 p-4 text-center">
+        <div class="card-body">
+          <i class="fas fa-trophy fa-3x mb-3 text-warning"></i>
+          <h3 class="card-title h5">ELO 랭킹 시스템</h3>
+          <p class="card-text">게임 결과에 따라 ELO 레이팅이 조정되며, 서버 내 랭킹을 확인할 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 p-4 text-center">
+        <div class="card-body">
+          <i class="fas fa-cogs fa-3x mb-3 text-info"></i>
+          <h3 class="card-title h5">서버별 설정</h3>
+          <p class="card-text">웹 대시보드에서 서버별로 명령어를 활성화/비활성화할 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 명령어 섹션 -->
+<section class="py-5">
+  <h2 class="text-center mb-5">주요 명령어</h2>
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-dark table-hover">
+              <thead>
+                <tr>
+                  <th>명령어</th>
+                  <th>설명</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>/인사</code></td>
+                  <td>봇이 인사를 합니다.</td>
+                </tr>
+                <tr>
+                  <td><code>/운세</code></td>
+                  <td>오늘의 운세를 알려줍니다.</td>
+                </tr>
+                <tr>
+                  <td><code>/가위바위보</code></td>
+                  <td>봇과 가위바위보 게임을 합니다.</td>
+                </tr>
+                <!-- <tr>
+                  <td><code>/끝말잇기</code></td>
+                  <td>봇과 한국어 끝말잇기 게임을 합니다.</td>
+                </tr> -->
+                <tr>
+                  <td><code>/타로</code></td>
+                  <td>타로 카드를 뽑아 운세를 봅니다.</td>
+                </tr>
+                <tr>
+                  <td><code>/주사위</code></td>
+                  <td>주사위를 굴립니다.</td>
+                </tr>
+                <tr>
+                  <td><code>/이모티콘</code></td>
+                  <td>텍스트를 이모티콘으로 변환합니다.</td>
+                </tr>
+                <tr>
+                  <td><code>/랭킹</code></td>
+                  <td>게임 랭킹을 확인합니다.</td>
+                </tr>
+                <tr>
+                  <td><code>/관리자</code></td>
+                  <td>서버 관리자를 위한 명령어입니다.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 초대 섹션 -->
+<section class="py-5 text-center">
+  <h2 class="mb-4">지금 바로 초대하세요!</h2>
+  <p class="lead">디스코드 서버에 봇을 초대하고 다양한 기능을 즐겨보세요.</p>
+  <a href="https://discord.com/api/oauth2/authorize?client_id=<%= config.discord.clientId %>&permissions=8&scope=bot%20applications.commands" class="btn btn-lg btn-discord mt-3" target="_blank">
+    <i class="fas fa-plus-circle me-2"></i> 봇 초대하기
+  </a>
+</section> 

@@ -1,0 +1,70 @@
+<div class="d-flex align-items-center justify-content-between mb-4">
+  <h1 class="mb-0">서버 관리</h1>
+  <a href="/dashboard" class="btn btn-outline-secondary">
+    <i class="fas fa-arrow-left me-2"></i> 대시보드로 돌아가기
+  </a>
+</div>
+
+<div class="card mb-4">
+  <div class="card-header">
+    <h5 class="mb-0">서버 정보</h5>
+  </div>
+  <div class="card-body" data-guild-id="<%= guild.id %>">
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <% if (guild.icon) { %>
+          <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.png" alt="Server Icon" class="rounded-circle" width="64" height="64">
+        <% } else { %>
+          <div class="server-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 64px; height: 64px; font-size: 2rem;">
+            <%= guild.name.substr(0, 2).toUpperCase() %>
+          </div>
+        <% } %>
+      </div>
+      <div class="col">
+        <h4 class="mb-1"><%= guild.name %></h4>
+        <p class="text-muted mb-0">ID: <%= guild.id %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">명령어 설정</h5>
+  </div>
+  <div class="card-body">
+    <% if (!commands || commands.length === 0) { %>
+      <p class="text-muted">명령어가 없습니다.</p>
+    <% } else { %>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <% commands.forEach(command => { %>
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><%= command %></h5>
+                <div class="form-check form-switch">
+                  <input class="form-check-input command-toggle" type="checkbox" 
+                         id="command-<%= command %>" 
+                         data-command="<%= command %>"
+                         <%= enabledCommands.includes(command) ? 'checked' : '' %>>
+                  <label class="form-check-label" for="command-<%= command %>">
+                    <%= enabledCommands.includes(command) ? '활성화됨' : '비활성화됨' %>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+  </div>
+  <div class="card-footer">
+    <button id="saveCommands" class="btn btn-secondary w-100" disabled>
+      <i class="fas fa-save me-2"></i> 저장하기
+    </button>
+    <button id="syncCommands" class="btn btn-primary w-100 mt-2">
+      <i class="fas fa-sync-alt me-2"></i> 동기화
+    </button>
+    <div id="syncCooldownMsg" class="text-warning mt-2" style="display:none; font-size:0.95em;">동기화는 1분에 한 번만 가능합니다.</div>
+  </div>
+</div>

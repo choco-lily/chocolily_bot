@@ -1,0 +1,46 @@
+{
+  "name": "discord_bot_with_ai",
+  "version": "1.0.0",
+  "description": "재미있는 쵸코릴리봇",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "watch": "nodemon --exec ts-node src/index.ts",
+    "dashboard": "ts-node src/dashboard/start.ts",
+    "dashboard:dev": "nodemon --exec ts-node src/dashboard/start.ts"
+  },
+  "dependencies": {
+    "@types/express-ejs-layouts": "^2.5.4",
+    "@types/node-fetch": "^2.6.12",
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.7",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.18.1",
+    "lowdb": "^7.0.1",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.7.0",
+    "passport": "^0.7.0",
+    "passport-discord": "^0.1.4",
+    "session-file-store": "^1.5.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/express": "^5.0.2",
+    "@types/express-session": "^1.18.1",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.17.47",
+    "@types/passport": "^1.0.17",
+    "@types/passport-discord": "^0.1.14",
+    "connect-livereload": "^0.6.1",
+    "livereload": "^0.9.3",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}

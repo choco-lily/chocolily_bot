@@ -1,0 +1,94 @@
+<h1 class="mb-4">대시보드</h1>
+
+<div class="row mb-4">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">내 정보</h5>
+        <div class="d-flex align-items-center mb-3">
+          <img src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>.png" alt="Avatar" class="rounded-circle me-3" width="64" height="64">
+          <div>
+            <h5 class="mb-0"><%= user.username %></h5>
+            <p class="text-muted mb-0">ID: <%= user.id %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">봇 정보</h5>
+        <p>쵸코릴리봇은 다양한 게임과 기능을 제공하는 다목적 봇입니다.</p>
+        <p class="mb-0">이 대시보드에서는 다음과 같은 기능을 사용할 수 있습니다:</p>
+        <ul>
+          <li>서버별로 봇 명령어 활성화/비활성화</li>
+          <li>게임 랭킹 확인</li>
+          <li>서버 통계 확인</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="mb-3">내 서버 <small class="text-muted">(관리자 권한이 있는 서버만 표시됩니다)</small></h2>
+
+<% if (guilds && guilds.length > 0) { %>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% guilds.forEach(guild => { %>
+      <div class="col">
+        <div class="card h-100 server-card">
+          <div class="card-body text-center">
+            <% if (guild.icon) { %>
+              <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>.png" class="server-icon mb-3" alt="<%= guild.name %>">
+            <% } else { %>
+              <div class="server-icon">
+                <%= guild.name.substr(0, 2).toUpperCase() %>
+              </div>
+            <% } %>
+            <h5 class="card-title server-name"><%= guild.name %></h5>
+            <p class="text-muted"><small>ID: <%= guild.id %></small></p>
+            <a href="/dashboard/server/<%= guild.id %>" class="btn btn-discord w-100">
+              <i class="fas fa-cogs me-2"></i> 관리하기
+            </a>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+<% } else { %>
+  <div class="alert alert-info">
+    <p class="mb-0">관리자 권한이 있는 서버가 없습니다. 서버를 관리하려면 서버에서 "서버 관리" 권한이 필요합니다.</p>
+  </div>
+  <p>봇을 초대하시려면 아래 버튼을 클릭하세요:</p>
+  <a href="https://discord.com/api/oauth2/authorize?client_id=<%= config.discord.clientId %>&permissions=8&scope=bot%20applications.commands" class="btn btn-discord" target="_blank">
+    <i class="fas fa-plus-circle me-2"></i> 봇 초대하기
+  </a>
+<% } %>
+
+<h2 class="mt-5 mb-3">랭킹</h2>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">가위바위보 랭킹</h5>
+        <p>가위바위보 게임의 ELO 레이팅 랭킹을 확인하세요.</p>
+        <a href="/dashboard/rankings/가위바위보" class="btn btn-discord">
+          <i class="fas fa-trophy me-2"></i> 랭킹 보기
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">끝말잇기 랭킹</h5>
+        <p>끝말잇기 게임의 ELO 레이팅 랭킹을 확인하세요.</p>
+        <a href="/dashboard/rankings/끝말잇기" class="btn btn-discord">
+          <i class="fas fa-trophy me-2"></i> 랭킹 보기
+        </a>
+      </div>
+    </div>
+  </div>
+</div> 

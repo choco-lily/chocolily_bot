@@ -1,0 +1,98 @@
+<div class="d-flex align-items-center justify-content-between mb-4">
+  <h1 class="mb-0"><%= game %> 랭킹</h1>
+  <a href="/dashboard" class="btn btn-outline-secondary">
+    <i class="fas fa-arrow-left me-2"></i> 대시보드로 돌아가기
+  </a>
+</div>
+
+<% if (game !== '끝말잇기') { %>
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">ELO 레이팅 랭킹</h5>
+    </div>
+    <div class="card-body">
+      <% if (rankings && rankings.length > 0) { %>
+        <div class="table-responsive">
+          <table class="table table-dark table-hover">
+            <thead>
+              <tr>
+                <th width="10%">랭킹</th>
+                <th width="50%">사용자</th>
+                <th width="15%">레이팅</th>
+                <th width="25%">전적</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% rankings.forEach((ranking, index) => { %>
+                <tr>
+                  <td>
+                    <% if (index === 0) { %>
+                      <span class="badge bg-warning">🥇 1</span>
+                    <% } else if (index === 1) { %>
+                      <span class="badge bg-secondary">🥈 2</span>
+                    <% } else if (index === 2) { %>
+                      <span class="badge bg-danger">🥉 3</span>
+                    <% } else { %>
+                      <span class="badge bg-dark"><%= index + 1 %></span>
+                    <% } %>
+                  </td>
+                  <td class="align-middle">
+                    <div class="d-flex align-items-center">
+                      <img src="<%= ranking.avatarURL %>" alt="<%= ranking.username %>" class="rounded-circle me-2" width="32" height="32">
+                      <div>
+                        <div class="fw-bold">
+                          <%= ranking.username %>
+                          <% if (ranking.userId === 'miku' || ranking.userId === 'teto' || ranking.userId === 'kafu') { %>
+                            <span class="badge bg-primary">BOT</span>
+                          <% } %>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="align-middle">
+                    <strong><%= ranking.rating %></strong>
+                  </td>
+                  <td class="align-middle">
+                    <span class="text-success"><%= ranking.wins %>승</span>
+                    <span class="text-danger"><%= ranking.losses %>패</span>
+                    <span class="text-info"><%= ranking.draws %>무</span>
+                    <br>
+                    <small class="text-muted">승률: <%= calculateWinRate(ranking) %>%</small>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } else { %>
+        <div class="alert alert-info">
+          <p class="mb-0">아직 랭킹 데이터가 없습니다. 더 많은 사용자가 게임을 플레이해야 합니다.</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">ELO 레이팅 시스템 설명</h5>
+    </div>
+    <div class="card-body">
+      <p>ELO 레이팅은 체스에서 시작된 실력 평가 시스템으로, 현재 다양한 게임에서 사용되고 있습니다.</p>
+      <p>레이팅 계산 방식:</p>
+      <ul>
+        <li>새로운 사용자는 기본 1000점으로 시작합니다.</li>
+        <li>게임 결과에 따라 레이팅이 조정됩니다. 자신보다 높은 레이팅의 상대를 이기면 더 많은 점수를 얻고, 낮은 레이팅의 상대에게 지면 더 많은 점수를 잃습니다.</li>
+        <li>무승부의 경우에도 레이팅 차이에 따라 점수가 조정됩니다.</li>
+      </ul>
+    </div>
+  </div>
+<% } %>
+
+<script>
+  // 승률 계산 함수
+  function calculateWinRate(ranking) {
+    const totalGames = ranking.wins + ranking.losses;
+    if (totalGames === 0) return 0;
+    return Math.round((ranking.wins / totalGames) * 100);
+  }
+</script> 
